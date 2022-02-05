@@ -11,7 +11,7 @@
 
 // ---------Порты---
 
-#define ONE_WIRE_BUS 3                      // Данные Т2 
+#define ONE_WIRE_BUS 10                      // Данные Т2 
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
@@ -76,25 +76,15 @@ void setup() {
 void loop() {
 
   
-  delay(100);                       // wait for a second
+  delay(1000);                       // wait for a second
 
 
-      TempSend();
-
-
-  
-}
-
-// Функция отправки показаний с термодатчика
-void TempSend(){
-  if (count1==0)
-  {
   sensors.requestTemperatures();   // от датчика получаем значение температуры
   float temp = sensors.getTempCByIndex(0);
   //client.publish("sevbodacha/ds18b20",String(temp)); // отправляем в топик для термодатчика значение температуры
   Serial.println(temp);
-  count1 = 300;  // пауза меду отправками значений температуры  коло 3 секунд
-  }
-  count1--; 
-  delay(10);  
+
+
+
+  
 }
